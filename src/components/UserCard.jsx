@@ -2,8 +2,10 @@ import { useState } from "react";
 import { FaUserEdit } from "react-icons/fa";
 import { IoMdMore } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
-import api from "../axiosConfig";
 import { toast } from "react-toastify";
+import api from "../axiosConfig";
+import { motion } from "framer-motion";
+
 
 const UserCard = ({ user, setData, setShowUpdateBox, setSelectedUser }) => {
   const [showMore, setShowMore] = useState(false);
@@ -35,43 +37,64 @@ const UserCard = ({ user, setData, setShowUpdateBox, setSelectedUser }) => {
   };
 
   return (
-    <>
-      <div className="relative bg-white rounded-2xl  shadow-md p-4 flex flex-col items-center hover:shadow-lg transition-shadow duration-300">
-        <img
-          src={user.avatar}
-          alt={user.fullName}
-          className="w-24 h-24 rounded-full mb-4"
-        />
-        <h2 className="text-lg font-semibold">{user.fullName}</h2>
-        <p className="text-sm text-gray-500">{user.email}</p>
-        <div
-          className="absolute top-4 right-4  cursor-pointer"
-          onClick={() => setShowMore((prev) => !prev)}
-        >
-          <IoMdMore size={22} />
-        </div>
-        {showMore && (
-          <div className="absolute top-10 right-4  cursor-pointer flex flex-col p-2 bg-white rounded-lg shadow-sm">
-            <div className="flex  items-center gap-1" onClick={handleEdit}>
-              <span>
-                <FaUserEdit />
-              </span>
-              <span>Edit</span>
-            </div>
-
-            <div
-              className="flex  items-center gap-1"
-              onClick={() => handleDelete(user.id)}
-            >
-              <span>
-                <MdDelete color="red" />
-              </span>
-              <span>Delete</span>
-            </div>
-          </div>
-        )}
+    <motion.div
+      initial={{ scale: 0.8, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      className="relative rounded-2xl shadow-md p-4 flex flex-col items-center hover:shadow-lg transition-shadow duration-300"
+      style={{ backgroundColor: "var(--color-surface)" }}
+    >
+      <img
+        src={user.avatar}
+        alt={user.fullName}
+        className="w-24 h-24 rounded-full mb-4"
+      />
+      <h2
+        className="text-lg font-semibold"
+        style={{ color: "var(--color-text-primary)" }}
+      >
+        {user.fullName}
+      </h2>
+      <p className="text-sm" style={{ color: "var(--color-text-secondary)" }}>
+        {user.email}
+      </p>
+      <div
+        className="absolute top-4 right-4 cursor-pointer"
+        onClick={() => setShowMore((prev) => !prev)}
+        style={{ color: "var(--color-icon)" }}
+      >
+        <IoMdMore size={22} />
       </div>
-    </>
+
+      {showMore && (
+        <div
+          className="absolute top-10 right-4 cursor-pointer flex flex-col p-2 rounded-lg shadow-sm"
+          style={{ backgroundColor: "var(--color-surface)" }}
+        >
+          <div
+            className="flex items-center gap-1 hover:opacity-80 transition"
+            onClick={handleEdit}
+            style={{ color: "var(--color-primary)" }}
+          >
+            <span>
+              <FaUserEdit />
+            </span>
+            <span>Edit</span>
+          </div>
+
+          <div
+            className="flex items-center gap-1 mt-2 hover:opacity-80 transition"
+            onClick={() => handleDelete(user.id)}
+            style={{ color: "var(--color-error)" }}
+          >
+            <span>
+              <MdDelete />
+            </span>
+            <span>Delete</span>
+          </div>
+        </div>
+      )}
+    </motion.div>
   );
 };
 export default UserCard;

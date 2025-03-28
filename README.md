@@ -1,12 +1,86 @@
-# React + Vite
+# EmployWise
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+EmployWise is a comprehensive employee management system designed to streamline HR processes and improve organizational efficiency.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Employee Management**: Add, update, and manage employee details.
 
-## Expanding the ESLint configuration
+## Folder Structure
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
+EmployWise
+├─ eslint.config.js
+├─ index.html
+├─ package-lock.json
+├─ package.json
+├─ public
+│  └─ favicon.png
+├─ README.md
+├─ src
+│  ├─ App.jsx
+│  ├─ assets
+│  ├─ axiosConfig.js
+│  ├─ components
+│  │  ├─ UpdateBox.jsx
+│  │  └─ UserCard.jsx
+│  ├─ index.css
+│  ├─ main.jsx
+│  └─ pages
+│     ├─ Login.jsx
+│     ├─ NotFound.jsx
+│     └─ User.jsx
+├─ tailwind.config.js
+└─ vite.config.js
+
+```
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Shreekant-04/EmployWise.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd EmployWise
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+## Usage
+
+1. Start the development server:
+   ```bash
+   npm start
+   ```
+2. Open your browser and navigate to `http://localhost:5173`.
+
+## Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch:
+   ```bash
+   git checkout -b feature-name
+   ```
+3. Commit your changes:
+   ```bash
+   git commit -m "Add feature-name"
+   ```
+4. Push to the branch:
+   ```bash
+   git push origin feature-name
+   ```
+5. Open a pull request.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## Contact
+
+For questions or feedback, please contact [shreekant4062@gmail.com].

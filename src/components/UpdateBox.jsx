@@ -2,6 +2,7 @@ import { useState } from "react";
 import api from "../axiosConfig";
 import { toast } from "react-toastify";
 import { IoClose } from "react-icons/io5";
+import { motion } from "framer-motion";
 
 const UpdateBox = ({ user, setData, setShowUpdateBox }) => {
   const [firstName, setFirstName] = useState(user.first_name);
@@ -47,17 +48,28 @@ const UpdateBox = ({ user, setData, setShowUpdateBox }) => {
   };
 
   return (
-    <div className="bg-[#0000006e] h-screen fixed top-0 left-0 w-full flex justify-center items-center z-50">
-      <div className="bg-white  border-green-500 w-full sm:w-3/4 md:w-1/2 p-6 rounded-xl relative shadow-xl">
-        {/* Close Button */}
+    <div
+      className="h-screen fixed bg-[#00000057] top-0 left-0 w-full flex justify-center items-center z-50"
+      
+    >
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.8 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
+        className="w-full sm:w-3/4 md:w-1/2 p-6 rounded-xl relative shadow-xl"
+        style={{
+          backgroundColor: "var(--color-surface)",
+        }}
+      >
         <button
           onClick={() => setShowUpdateBox(false)}
-          className="absolute top-3 right-4 text-red-500 hover:text-red-700 cursor-pointer"
+          className="absolute top-3 right-4 cursor-pointer"
+          style={{ color: "var(--color-error)" }}
         >
           <IoClose size={28} />
         </button>
 
-        {/* Form */}
         <form
           onSubmit={handleSubmit}
           className="flex flex-col items-center gap-4"
@@ -67,7 +79,12 @@ const UpdateBox = ({ user, setData, setShowUpdateBox }) => {
             alt={user.fullName}
             className="w-24 h-24 rounded-full mb-2"
           />
-          <h2 className="text-xl font-semibold mb-2">Update User</h2>
+          <h2
+            className="text-xl font-semibold mb-2"
+            style={{ color: "var(--color-text-primary)" }}
+          >
+            Update User
+          </h2>
 
           <input
             type="text"
@@ -75,7 +92,11 @@ const UpdateBox = ({ user, setData, setShowUpdateBox }) => {
             onChange={(e) => setFirstName(e.target.value)}
             placeholder="First Name"
             required
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none"
+            style={{
+              borderColor: "var(--color-border)",
+              color: "var(--color-text-primary)",
+            }}
           />
 
           <input
@@ -84,7 +105,11 @@ const UpdateBox = ({ user, setData, setShowUpdateBox }) => {
             onChange={(e) => setLastName(e.target.value)}
             placeholder="Last Name"
             required
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none"
+            style={{
+              borderColor: "var(--color-border)",
+              color: "var(--color-text-primary)",
+            }}
           />
 
           <input
@@ -93,18 +118,30 @@ const UpdateBox = ({ user, setData, setShowUpdateBox }) => {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
             required
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none"
+            style={{
+              borderColor: "var(--color-border)",
+              color: "var(--color-text-primary)",
+            }}
           />
 
-          <button
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             type="submit"
             disabled={loading}
-            className="mt-4 bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 disabled:bg-gray-400"
+            className="mt-4 px-6 py-2 rounded-lg font-medium transition cursor-pointer"
+            style={{
+              backgroundColor: loading
+                ? "var(--color-text-secondary)"
+                : "var(--color-success)",
+              color: "var(--color-surface)",
+            }}
           >
             {loading ? "Updating..." : "Update"}
-          </button>
+          </motion.button>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 };

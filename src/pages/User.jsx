@@ -7,6 +7,7 @@ import api from "../axiosConfig";
 import UserCard from "../components/UserCard";
 import UpdateBox from "../components/UpdateBox";
 import { LuLogOut } from "react-icons/lu";
+import { motion } from "framer-motion";
 
 const User = () => {
   const navigate = useNavigate();
@@ -83,18 +84,33 @@ const User = () => {
     <>
       <div className="min-h-screen bg-gray-100 p-6">
         <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-          <h1 className="text-2xl font-bold text-center md:text-left ">
+          <motion.h1
+            className="text-2xl font-bold text-center md:text-left"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          >
             EmployWise
-          </h1>
-          <button
-            className="flex gap-2 items-center justify-center md:justify-start md:order-1"
+          </motion.h1>
+          <motion.button
+            className="flex gap-2 items-center justify-center md:justify-start md:order-1 cursor-pointer"
             onClick={handleLogout}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut", delay: 0.2 }}
           >
             <span className="hidden md:block">Logout</span>
             <LuLogOut color="red" />
-          </button>
+          </motion.button>
 
-          <div className="relative w-full md:w-1/3">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="relative w-full md:w-1/3"
+          >
             <input
               type="text"
               id="search"
@@ -106,7 +122,7 @@ const User = () => {
             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">
               <CiSearch size={22} />
             </span>
-          </div>
+          </motion.div>
         </div>
 
         {loading ? (
@@ -134,27 +150,43 @@ const User = () => {
             </div>
 
             {/* Pagination */}
-            <div className="container flex justify-center items-center  gap-4 mt-10">
+            <div className="container flex justify-center items-center gap-4 mt-10">
               {page > 1 && (
-                <button
+                <motion.button
                   onClick={handlePrev}
                   disabled={page === 1}
-                  className=" p-1  bg-blue-500 text-white rounded-full cursor-pointer"
+                  className="p-1 bg-blue-500 text-white rounded-full cursor-pointer"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3 }}
                 >
                   <GrFormPreviousLink size={22} />
-                </button>
+                </motion.button>
               )}
 
-              <span className="px-4 py-2 bg-white shadow rounded-lg">
-                Page {page}
-              </span>
+              <motion.span
+                className="px-4 py-2 bg-white shadow rounded-full"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, delay: 0.1 }}
+              >
+                 {page}
+              </motion.span>
+
               {totalPage > page && (
-                <button
+                <motion.button
                   onClick={handleNext}
-                  className=" p-1  bg-blue-500 text-white rounded-full cursor-pointer"
+                  className="p-1 bg-blue-500 text-white rounded-full cursor-pointer"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3 }}
                 >
                   <GrFormNextLink size={22} />
-                </button>
+                </motion.button>
               )}
             </div>
           </>
