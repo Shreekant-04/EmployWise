@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import api from "../axiosConfig";
+import { useNavigate } from "react-router";
 
 const Login = () => {
+  const nav = useNavigate();
+  const token = localStorage.getItem("token");
   const [formData, setFormData] = useState({ email: "", password: "" });
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -12,12 +15,20 @@ const Login = () => {
 
     try {
       const response = await api.post("api/login", formData);
-      console.log("Login successful", response.data);
-      // Handle successful login (e.g., store token, redirect)
+      if (response && response.data.token) {
+        localStorage.setItem("token", response.data.token);
+        nav("/user");
+      }
     } catch (err) {
       console.error("Login error", err.response?.data || err.message);
     }
   };
+
+  useEffect(() => {
+    if (token) {
+      nav("/user");
+    }
+  }, [token]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
@@ -67,3 +78,11 @@ const Login = () => {
 };
 
 export default Login;
+
+const FallBack = () => {
+  return (
+    <>
+      <div>Loading</div>
+    </>
+  );
+};
