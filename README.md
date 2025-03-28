@@ -5,6 +5,7 @@ EmployWise is a comprehensive employee management system designed to streamline 
 ## Features
 
 - **Employee Management**: Add, update, and manage employee details.
+- **Animations**: Smooth transitions and animations for an enhanced user experience.
 
 ## Folder Structure
 
